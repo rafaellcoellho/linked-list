@@ -85,13 +85,18 @@ void LinkedList_Delete(llist *self, uint16_t item)
 
 void LinkedList_Show(llist *self)
 {
+    if(LinkedList_IsEmpty(self)) printf("\tEmpty Linked List");
     link p = self->head;
-
-    if(p == NULL) printf("\tEmpty Linked List");
 
     while(p != NULL) {
         printf("\t%d->", p->item);
         p = p->next;
     }
     printf("\n");
+}
+
+bool LinkedList_IsEmpty(llist *self)
+{
+    if (self->head == NULL && self->tail == NULL) return true;
+    else return false;
 }

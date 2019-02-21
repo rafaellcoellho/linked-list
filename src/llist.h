@@ -2,6 +2,7 @@
 #define _LLIST_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef struct llist llist;
 
@@ -11,5 +12,6 @@ void LinkedList_Prepend(llist *self, uint16_t item);
 void LinkedList_Append(llist *self, uint16_t item);
 void LinkedList_Delete(llist *self, uint16_t item);
 void LinkedList_Show(llist *self);
+bool LinkedList_IsEmpty(llist *self);
 
 #endif // _LLIST_H
