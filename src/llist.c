@@ -16,16 +16,12 @@ struct llist
     link tail;
 };
 
-llist *LinkedList_Create(uint16_t item) 
+llist *LinkedList_Create(void) 
 {   
     llist *self = malloc(sizeof(llist));
 
-    link head = (link) malloc(sizeof(node));
-    head->item = item;
-    head->next = NULL;
-
-    self->head = head;
-    self->tail = head;
+    self->head = NULL;
+    self->tail = NULL;
     return self;
 }
 

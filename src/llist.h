@@ -5,7 +5,7 @@
 
 typedef struct llist llist;
 
-llist *LinkedList_Create(uint16_t item);
+llist *LinkedList_Create(void);
 void LinkedList_Destroy(llist *self);
 void LinkedList_Prepend(llist *self, uint16_t item);
 void LinkedList_Append(llist *self, uint16_t item);
