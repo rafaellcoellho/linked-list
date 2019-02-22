@@ -14,6 +14,7 @@ struct llist
 {
     link head;
     link tail;
+    uint32_t size;
 };
 
 llist *LinkedList_Create(void) 
@@ -22,6 +23,7 @@ llist *LinkedList_Create(void)
 
     self->head = NULL;
     self->tail = NULL;
+    self->size = 0;
     return self;
 }
 
@@ -35,8 +37,7 @@ void LinkedList_Destroy(llist *self)
         free(p);
         p = aux;
     }
-    self->head = NULL;
-    self->tail = NULL;
+    free(self);
 }
 
 void LinkedList_Prepend(llist *self, uint16_t item)
@@ -44,8 +45,9 @@ void LinkedList_Prepend(llist *self, uint16_t item)
     link new_node = (link) malloc(sizeof(node));
     new_node->item = item;
     new_node->next = self->head;
-
     self->head = new_node;
+    if(LinkedList_IsEmpty(self)) self->tail = new_node;
+    self->size++;
 }
 
 void LinkedList_Append(llist *self, uint16_t item)
@@ -53,13 +55,14 @@ void LinkedList_Append(llist *self, uint16_t item)
     link new_node = (link) malloc(sizeof(node));
     new_node->item = item;
     new_node->next = NULL;
-
-    if(LinkedList_IsEmpty(self)) {
+    if (LinkedList_IsEmpty(self)) {
         self->head = new_node;
+        self->tail = new_node;
     } else {
         self->tail->next = new_node;
+        self->tail = new_node;
     }
-    self->tail = new_node;
+    self->size++;
 }
 
 void LinkedList_DeleteItem(llist *self, uint16_t item)
@@ -69,6 +72,7 @@ void LinkedList_DeleteItem(llist *self, uint16_t item)
     if (p->item == item) {
         self->head = p->next;
         free(p);
+        self->size--;
         return;
     }
 
@@ -83,8 +87,9 @@ void LinkedList_DeleteItem(llist *self, uint16_t item)
     if (p_after->item == item) {
         if(p_after->next == NULL) p->next = NULL; // É o ultimo? 
         else p->next = p_after->next; 
+        self->size--;
         free(p_after);
-    } else return; // Não está na lista, então acaba sem fazer nada
+    }
 }
 
 void LinkedList_Show(llist *self)
@@ -101,6 +106,11 @@ void LinkedList_Show(llist *self)
 
 bool LinkedList_IsEmpty(llist *self)
 {
-    if (self->head == NULL && self->tail == NULL) return true;
+    if (self->size == 0) return true;
     else return false;
+}
+
+uint32_t LinkedList_GetSize(llist *self)
+{
+    return self->size;
 }
