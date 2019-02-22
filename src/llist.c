@@ -67,12 +67,16 @@ void LinkedList_Append(llist *self, uint16_t item)
 
 void LinkedList_DeleteItem(llist *self, uint16_t item)
 {
+    if(self->size == 0) return;
+
     // Caso seja o primeiro item, já retira e termina a função
     link p = self->head;
     if (p->item == item) {
         self->head = p->next;
         free(p);
         self->size--;
+        return;
+    } else if (self->size == 1) { // Caso não seja, mas só tem 1 elemento
         return;
     }
 
@@ -113,4 +117,20 @@ bool LinkedList_IsEmpty(llist *self)
 uint32_t LinkedList_GetSize(llist *self)
 {
     return self->size;
+}
+
+uint16_t LinkedList_Shift(llist *self)
+{
+    if(LinkedList_IsEmpty(self)) return 0;
+    uint16_t item = self->head->item;
+    link node = self->head;
+    if(LinkedList_GetSize(self) == 1) {
+        self->head = NULL;
+        self->tail = NULL;
+    } else {
+        self->head = self->head->next;
+    }
+    free(node);
+    self->size--;
+    return item;
 }

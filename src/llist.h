@@ -13,6 +13,7 @@ void LinkedList_Append(llist *self, uint16_t item);
 void LinkedList_DeleteItem(llist *self, uint16_t item);
 void LinkedList_Show(llist *self);
 bool LinkedList_IsEmpty(llist *self);
-uint32_t LinkeList_GetSize(llist *self);
+uint32_t LinkedList_GetSize(llist *self);
+uint16_t LinkedList_Shift(llist *self);
 
 #endif // _LLIST_H
