@@ -54,11 +54,15 @@ void LinkedList_Append(llist *self, uint16_t item)
     new_node->item = item;
     new_node->next = NULL;
 
-    self->tail->next = new_node;
+    if(LinkedList_IsEmpty(self)) {
+        self->head = new_node;
+    } else {
+        self->tail->next = new_node;
+    }
     self->tail = new_node;
 }
 
-void LinkedList_Delete(llist *self, uint16_t item)
+void LinkedList_DeleteItem(llist *self, uint16_t item)
 {
     // Caso seja o primeiro item, já retira e termina a função
     link p = self->head;
