@@ -8,10 +8,13 @@ Just install [ceedling](https://github.com/ThrowTheSwitch/Ceedling).
 
 ## Usage
 
-Run the tests: 
+Compile and run
 
 ```bash
-$ ceedling test:all
+$ meson build
+$ cd build
+$ ninja
+$ ./src/main
 ```
 
 ## Authors
