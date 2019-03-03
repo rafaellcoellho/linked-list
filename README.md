@@ -4,7 +4,7 @@ A simple linked list implementation for a [blog post](https://rafaellcoellho.net
 
 ## Prerequisites
 
-Just install [ceedling](https://github.com/ThrowTheSwitch/Ceedling).
+Install [meson and ninja](https://mesonbuild.com/Getting-meson.html) to build the project.
 
 ## Usage
 
